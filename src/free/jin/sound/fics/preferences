@@ -1,0 +1,47 @@
+on=boolean;true
+
+# Chat patterns on which sounds are generated. The match is done against the 
+# string "<type>.<forum>.<sender>\n" (without the <> of course), where <forum> 
+# is an empty string if null, or otherwise theForum.toString().
+
+num-chat-patterns = integer;2
+
+chat-pattern-0 = ^tell\..*
+chat-sound-0 = whistle.au
+
+chat-pattern-1 = ^say\..*
+chat-sound-1 = whistle.au
+
+
+# Text patterns on which sounds are generated. The match is done against the
+# received text line.
+
+num-text-patterns = integer;3
+
+text-pattern-0 = ^Notification: [A-z]{3,17} has arrived\.$
+text-sound-0 = ding.au
+
+text-pattern-1 = ^Notification: [A-z]{3,17} has departed\.$
+text-sound-1 = cork.au
+
+text-pattern-2 = ^Notification: [A-z]{3,17}, who has an adjourned game with you, has arrived\.$
+text-sound-2 = ding.au
+
+
+
+OnLogin = welcome-fics.au
+OnDisconnect = goodbye.au
+Move = move-fics.au
+Capture = capture-fics.au
+Castling = castle-fics.au
+Check = check.au
+Checkmate = checkmate.au
+DrawOffer = draw.au
+AbortOffer = abort.au
+AdjournOffer = adjourn.au
+TakebackOffer = takeback.au
+IllegalMove = buzzer.au
+GameEnd = fitebell.au
+GameStart = fitebell.au
+FriendConnected = ding.au
+FriendDisconnected = cork.au
