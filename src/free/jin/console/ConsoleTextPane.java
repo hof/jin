@@ -21,6 +21,7 @@
 
 package free.jin.console;
 
+import free.jin.ui.Command;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -38,7 +39,7 @@ import free.jin.Preferences;
 import free.util.GraphicsUtilities;
 import free.util.PlatformUtils;
 import free.workarounds.FixedJTextPane;
-
+import free.jin.ui.IssueCommandMenuItem;
 
 /**
  * An extension of JTextPane which is used as the output component in a Console.
@@ -330,8 +331,7 @@ public class ConsoleTextPane extends FixedJTextPane{
     if ((selection == null) || (selection.length() == 0))
       return null;
 
-    if (defaultPopupMenu == null)
-      defaultPopupMenu = createPopupMenu();
+    defaultPopupMenu = createPopupMenu();
     
     return defaultPopupMenu;
   }
@@ -365,7 +365,7 @@ public class ConsoleTextPane extends FixedJTextPane{
       
       if ("serverCommand".equals(itemType)){
         String command = prefs.getString(itemPrefix + "command");
-        popupMenu.add(new IssueCommandMenuItem(label, command));
+        popupMenu.add(new IssueCommandMenuItem(console.getConsoleManager().getConn(), label, command, getSelectedText()));
       }
       else if ("separator".equals(itemType))
         popupMenu.addSeparator();
@@ -874,55 +874,8 @@ public class ConsoleTextPane extends FixedJTextPane{
 
     FontMetrics metrics = GraphicsUtilities.getFontMetrics(getFont());
     return metrics.getHeight();
-  }
-  
-  
-  
-  /**
-   * A <code>JMenuItem</code> which, when activated, sends a command to the
-   * server consisting of the current selection in the console appended to the
-   * specified string. Useful for the console popup.
-   */
-  
-  protected class IssueCommandMenuItem extends JMenuItem{
-    
-    
-    
-    /**
-     * The server command to which the selection is appended.
-     */
-    
-    private final String serverCommand;
-    
-    
-    
-    /**
-     * Creates a new <code>IssueCommandMenuItem</code> with the specified
-     * label and server command.
-     */
-    
-    public IssueCommandMenuItem(String label, String serverCommand){
-      super(label);
-      
-      this.serverCommand = serverCommand;
-    }
-    
-    
-    
-    /**
-     * Sends the command to the server.
-     */
-    
-    protected void fireActionPerformed(ActionEvent evt){
-      console.issueCommand(new Command(serverCommand + " " + getSelectedText(), 0));
-    }
-    
-    
-    
-  }
-  
-  
-  
+  }  
+
   /**
    * A <code>JMenuItem</code> which, when activated, copies the current console
    * selection to the clipboard. Useful for the console popup. 
@@ -1020,6 +973,4 @@ public class ConsoleTextPane extends FixedJTextPane{
     
   }
   
-  
-
 }

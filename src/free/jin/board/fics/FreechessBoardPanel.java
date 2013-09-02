@@ -53,7 +53,9 @@ public class FreechessBoardPanel extends BoardPanel{
   protected String createWhiteLabelText(Game game){
     int rating = game.getWhiteRating();
     String ratingString = (rating > 0) ? (" "+rating) : "";
-    return game.getWhiteName() + game.getWhiteTitles() + ratingString;
+    String result = game.getWhiteName() + game.getWhiteTitles() + ratingString;
+    result += " (" + board.getPosition().getWhiteMaterialCount() + ")";
+    return result; 
   }
 
 
@@ -67,7 +69,9 @@ public class FreechessBoardPanel extends BoardPanel{
   protected String createBlackLabelText(Game game){
     int rating = game.getBlackRating();
     String ratingString = (rating > 0) ? (" "+rating) : "";
-    return game.getBlackName() + game.getBlackTitles() + ratingString;
+    String result = game.getBlackName() + game.getBlackTitles() + ratingString;
+    result += " (" + board.getPosition().getBlackMaterialCount() + ")";
+    return result; 
   }
 
 

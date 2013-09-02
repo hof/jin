@@ -676,8 +676,35 @@ public final class Position{
     return result;
   }
 
+  public int getWhiteMaterialCount() { 
+      int result = 0; 
 
+      for (int file = 0; file < pieces.length; file++) { 
+        for (int rank = 0; rank < pieces[file].length; rank++){
+            Piece piece = pieces[file][rank];
+            if (piece != null && piece.getColor() == Piece.WHITE) { 
+                result += piece.getValue(); 
+            }
+        }
+      }
 
+      return result; 
+  }
+
+  public int getBlackMaterialCount() {
+      int result = 0;
+
+      for (int file = 0; file < pieces.length; file++) {
+        for (int rank = 0; rank < pieces[file].length; rank++){
+            Piece piece = pieces[file][rank];
+            if (piece != null && piece.getColor() == Piece.BLACK) {
+                result += piece.getValue();
+            }
+        }
+      }
+
+      return result;
+  }
 
   /**
    * Instances of this class is allowed to make modifications to a Position

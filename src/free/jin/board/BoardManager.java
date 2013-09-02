@@ -167,7 +167,6 @@ public class BoardManager extends Plugin implements GameListener, UserMoveListen
     obtainSoundManager();
     initPreferences();
     registerConnListeners();
-    preload();
   }
 
 
@@ -921,19 +920,7 @@ public class BoardManager extends Plugin implements GameListener, UserMoveListen
     listenerManager.addConnectionListener(this);
   }
   
-  
-  
-  /**
-   * Preloads certain things. This method is called once when the plugin starts.
-   */
    
-  private void preload(){
-    createBoardPanel(new Game(Game.MY_GAME, new Position(), 0, "AlexTheGreat", "Kasparov", 5*60*1000, 2000,
-        5*60*1000, 2000, 1800, 2852, "blah", "Blitz", true, true, "C", "GM", false, Player.WHITE_PLAYER));
-  }
-
-
-
   /**
    * Unregisters all the necessary listeners from the Connection. 
    */
@@ -1064,7 +1051,6 @@ public class BoardManager extends Plugin implements GameListener, UserMoveListen
 
   protected BoardPanel createBoardPanel(Game game){
     BoardPanel boardPanel = new BoardPanel(this, game);
-
     return boardPanel;
   }
 

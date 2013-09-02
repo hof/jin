@@ -21,6 +21,7 @@
 
 package free.jin.console;
 
+import free.jin.ui.Command;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

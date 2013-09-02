@@ -86,19 +86,19 @@ public class ChessPiece extends Piece{
 
   // Final objects representing each piece.
 
-  public static final ChessPiece WHITE_PAWN   = new ChessPiece(WHITE,PAWN);
-  public static final ChessPiece WHITE_KNIGHT = new ChessPiece(WHITE,KNIGHT);
-  public static final ChessPiece WHITE_BISHOP = new ChessPiece(WHITE,BISHOP);
-  public static final ChessPiece WHITE_ROOK   = new ChessPiece(WHITE,ROOK);
-  public static final ChessPiece WHITE_QUEEN  = new ChessPiece(WHITE,QUEEN);
-  public static final ChessPiece WHITE_KING   = new ChessPiece(WHITE,KING);
+  public static final ChessPiece WHITE_PAWN   = new ChessPiece(WHITE,PAWN, 1);
+  public static final ChessPiece WHITE_KNIGHT = new ChessPiece(WHITE,KNIGHT, 3);
+  public static final ChessPiece WHITE_BISHOP = new ChessPiece(WHITE,BISHOP, 3);
+  public static final ChessPiece WHITE_ROOK   = new ChessPiece(WHITE,ROOK, 5);
+  public static final ChessPiece WHITE_QUEEN  = new ChessPiece(WHITE,QUEEN, 9);
+  public static final ChessPiece WHITE_KING   = new ChessPiece(WHITE,KING, 0);
   
-  public static final ChessPiece BLACK_PAWN   = new ChessPiece(BLACK,PAWN);
-  public static final ChessPiece BLACK_KNIGHT = new ChessPiece(BLACK,KNIGHT);
-  public static final ChessPiece BLACK_BISHOP = new ChessPiece(BLACK,BISHOP);
-  public static final ChessPiece BLACK_ROOK   = new ChessPiece(BLACK,ROOK);
-  public static final ChessPiece BLACK_QUEEN  = new ChessPiece(BLACK,QUEEN);
-  public static final ChessPiece BLACK_KING   = new ChessPiece(BLACK,KING);
+  public static final ChessPiece BLACK_PAWN   = new ChessPiece(BLACK,PAWN, 1);
+  public static final ChessPiece BLACK_KNIGHT = new ChessPiece(BLACK,KNIGHT, 3);
+  public static final ChessPiece BLACK_BISHOP = new ChessPiece(BLACK,BISHOP, 3);
+  public static final ChessPiece BLACK_ROOK   = new ChessPiece(BLACK,ROOK, 5);
+  public static final ChessPiece BLACK_QUEEN  = new ChessPiece(BLACK,QUEEN, 9);
+  public static final ChessPiece BLACK_KING   = new ChessPiece(BLACK,KING, 0);
 
 
 
@@ -112,8 +112,8 @@ public class ChessPiece extends Piece{
    * @param type The type of the piece (Piece.KNIGHT, Piece.BISHOP etc.)
    */
 
-  private ChessPiece(int color, int type){
-    super(color, type);
+  private ChessPiece(int color, int type, int value){
+    super(color, type, value);
   }
 
 

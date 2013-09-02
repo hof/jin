@@ -88,6 +88,7 @@ import free.jin.event.MoveMadeEvent;
 import free.jin.event.OfferEvent;
 import free.jin.event.PositionChangedEvent;
 import free.jin.event.TakebackEvent;
+import free.jin.ui.IssueCommandMenuItem;
 import free.util.PlatformUtils;
 import free.util.SquareLayout;
 import free.util.Utilities;
@@ -97,6 +98,7 @@ import free.util.swing.NonEditableTableModel;
 import free.util.swing.SwingUtils;
 import free.workarounds.FixedJPanel;
 import free.workarounds.FixedJTable;
+import javax.swing.JPopupMenu;
 
 
 /**
@@ -205,7 +207,7 @@ public class BoardPanel extends FixedJPanel implements MoveListener, GameListene
    * The JLabel displaying information about the player with the white pieces.
    */
 
-  protected JLabel whiteLabel;
+  protected PlayerLabel whiteLabel;
 
 
 
@@ -214,7 +216,7 @@ public class BoardPanel extends FixedJPanel implements MoveListener, GameListene
    * The JLabel displaying information about the player with the black pieces.
    */
 
-  protected JLabel blackLabel;
+  protected PlayerLabel blackLabel;
 
 
 
@@ -753,8 +755,8 @@ public class BoardPanel extends FixedJPanel implements MoveListener, GameListene
    * pieces.
    */
 
-  protected JLabel createWhiteLabel(Game game){
-    JLabel whiteLabel = new JLabel(createWhiteLabelText(game));
+  protected PlayerLabel createWhiteLabel(Game game){
+    PlayerLabel whiteLabel = new PlayerLabel(createPopupMenu(game.getWhiteName()), createWhiteLabelText(game));
     whiteLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
     return whiteLabel;
   }
@@ -766,7 +768,10 @@ public class BoardPanel extends FixedJPanel implements MoveListener, GameListene
    */
 
   protected String createWhiteLabelText(Game game){
-    return game.getWhiteName() + game.getWhiteTitles() + " " + game.getWhiteRating();
+    String result = game.getWhiteName() + game.getWhiteTitles() + " " + game.getWhiteRating();
+    result += " (" + board.getPosition().getWhiteMaterialCount() + ")";
+    System.out.println("WhiteLabel: "+result);
+    return result;
   }
 
 
@@ -777,8 +782,8 @@ public class BoardPanel extends FixedJPanel implements MoveListener, GameListene
    * pieces.
    */
 
-  protected JLabel createBlackLabel(Game game){
-    JLabel blackLabel = new JLabel(createBlackLabelText(game));
+  protected PlayerLabel createBlackLabel(Game game){
+    PlayerLabel blackLabel = new PlayerLabel(createPopupMenu(game.getBlackName()), createBlackLabelText(game));
     blackLabel.setFont(new Font("SansSerif", Font.BOLD, 20));
     return blackLabel;
   }
@@ -791,7 +796,9 @@ public class BoardPanel extends FixedJPanel implements MoveListener, GameListene
    */
 
   protected String createBlackLabelText(Game game){
-    return game.getBlackName() + game.getBlackTitles() + " " + game.getBlackRating();
+    String result = game.getBlackName() + game.getBlackTitles() + " " + game.getBlackRating();
+    result += " (" + board.getPosition().getBlackMaterialCount() + ")";
+    return result;
   }
 
 
@@ -2136,6 +2143,29 @@ public class BoardPanel extends FixedJPanel implements MoveListener, GameListene
     super.removeNotify();
   }
 
+    /**
+   * Creates the popup menu for the white and black labels.
+   */
+  protected JPopupMenu createPopupMenu(String name){
 
+    JPopupMenu popupMenu = new JPopupMenu();
+
+    popupMenu.add(new IssueCommandMenuItem(boardManager.getConn(), "finger", "finger", name));
+    popupMenu.add(new IssueCommandMenuItem(boardManager.getConn(), "vars", "vars", name));
+    popupMenu.add(new IssueCommandMenuItem(boardManager.getConn(), "ping", "ping", name));
+    popupMenu.add(new IssueCommandMenuItem(boardManager.getConn(), "match", "match", name));
+    popupMenu.add(new IssueCommandMenuItem(boardManager.getConn(), "assess", "assess", name));
+    popupMenu.addSeparator();
+    popupMenu.add(new IssueCommandMenuItem(boardManager.getConn(), "observe", "observe", name));
+    popupMenu.add(new IssueCommandMenuItem(boardManager.getConn(), "follow", "follow", name));
+    popupMenu.addSeparator();
+    popupMenu.add(new IssueCommandMenuItem(boardManager.getConn(), "history", "history", name));
+    popupMenu.add(new IssueCommandMenuItem(boardManager.getConn(), "stored", "stored", name));
+    popupMenu.add(new IssueCommandMenuItem(boardManager.getConn(), "liblist", "liblist", name));
+
+    popupMenu.setSize(popupMenu.getPreferredSize());
+
+    return popupMenu;
+  }
 
 }

@@ -21,6 +21,7 @@
 
 package free.jin.console;
 
+import free.jin.ui.Command;
 import javax.swing.text.Position;
 
 

@@ -21,6 +21,7 @@
 
 package free.jin.console;
 
+import free.jin.ui.Command;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;

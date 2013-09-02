@@ -54,8 +54,11 @@ public abstract class Piece{
 
   protected final int val;
 
-
-
+  /**
+   * Value of this piece, used for material count display.
+   * 
+   */
+  protected final int value;  
 
   /**
    * Creates a Piece of the given color and type.
@@ -64,7 +67,7 @@ public abstract class Piece{
    * @param type The type of the piece, 0 is not allowed.
    */
 
-  protected Piece(int color, int type){
+  protected Piece(int color, int type, int value){
     switch(color){
       case WHITE:
       case BLACK:
@@ -76,6 +79,7 @@ public abstract class Piece{
       throw new IllegalArgumentException("Piece type may not be 0");
       
     this.val = color*type;
+    this.value = value; 
   }
 
 
@@ -256,5 +260,8 @@ public abstract class Piece{
     return val==((Piece)o).val;
   }
 
+  public int getValue() {
+    return value;
+  }  
 
 }

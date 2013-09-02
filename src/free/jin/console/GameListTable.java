@@ -21,6 +21,7 @@
 
 package free.jin.console;
 
+import free.jin.ui.Command;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Point;
