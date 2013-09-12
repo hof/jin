@@ -109,7 +109,7 @@ import javax.swing.JPopupMenu;
  * directly.
  */
 
-public class BoardPanel extends FixedJPanel implements MoveListener, GameListener, 
+public class BoardPanel extends FixedJPanel implements MoveListener, GameListener,
     AdjustmentListener, PropertyChangeListener{
 
 
@@ -1619,10 +1619,14 @@ public class BoardPanel extends FixedJPanel implements MoveListener, GameListene
       moveEnRoute = null;
 
     updateClockActiveness();
+    updateLabels();
     addMoveToListTable(move);
   }
 
-
+  public void updateLabels() {
+      whiteLabel.setText(createWhiteLabelText(game));
+      blackLabel.setText(createBlackLabelText(game));
+  }
 
 
   /**
@@ -1678,6 +1682,7 @@ public class BoardPanel extends FixedJPanel implements MoveListener, GameListene
 
     updateClockActiveness();
     updateMoveListTable();
+    updateLabels(); 
   }
 
 
@@ -1716,6 +1721,7 @@ public class BoardPanel extends FixedJPanel implements MoveListener, GameListene
 
     updateClockActiveness();
     updateMoveListTable();
+    updateLabels();
   }
 
 
@@ -1749,6 +1755,7 @@ public class BoardPanel extends FixedJPanel implements MoveListener, GameListene
     updateClockActiveness();
     setDisplayedMove(madeMoves.size());
     updateMoveListTable();
+    updateLabels(); 
   }
 
 
@@ -1871,6 +1878,7 @@ public class BoardPanel extends FixedJPanel implements MoveListener, GameListene
         
         // Update clock activeness
         updateClockActiveness();
+        updateLabels();
         
         if (moveSendingMode == BoardManager.LEGAL_CHESS_MOVE_SENDING_MODE)
           board.setEditable(false);
@@ -2143,7 +2151,8 @@ public class BoardPanel extends FixedJPanel implements MoveListener, GameListene
     super.removeNotify();
   }
 
-    /**
+
+  /**
    * Creates the popup menu for the white and black labels.
    */
   protected JPopupMenu createPopupMenu(String name){
